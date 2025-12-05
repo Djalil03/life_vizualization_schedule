@@ -42,7 +42,7 @@ export const useGetCalculateEdges = (events: Event[], dateToX: (date: Date) => n
 
 
     const calculatedEdges = useMemo(() => {
-        return edges.map((edge, idx) => {
+        return edges.map((edge) => {
             const sourceX = dateToX(parseISO(edge.sourceEvent.endDate)) - PADDING_X;
             const sourceY = CATEGORY_Y_MAP[edge.sourceEvent.categoryId] + NODE_HEIGHT / 2;
 
