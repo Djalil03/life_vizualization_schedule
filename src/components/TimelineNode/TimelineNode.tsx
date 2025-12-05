@@ -22,7 +22,6 @@ const TimelineNode = (props: TimelineNodeProps) => {
         color,
         onNodeHover
     } = props;
-    const yCenter = yPosition + height / 2;
 
     const handleMouseEnter = useCallback(() => {
         onNodeHover?.(event, x + width / 2, yPosition + height + 10);

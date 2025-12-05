@@ -9,7 +9,6 @@ interface GraphEdgeProps {
 const GraphEdge: React.FC<GraphEdgeProps> = ({ source, target }) => {
     const isStraight = source.y === target.y;
 
-    const midX = (source.x + target.x) / 2;
     const midYOffset = 0;
     
     const points: number[] = [source.x, source.y , target.x, target.y];
