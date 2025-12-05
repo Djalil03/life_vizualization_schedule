@@ -1,0 +1,77 @@
+[
+  {
+    "id": "e_uni_bachelor",
+    "type": "study",
+    "name": "Бакалавриат по ИТ",
+    "startDate": "2012-09-01",
+    "endDate": "2016-06-30",
+    "categoryId": "education",
+    "relatedTo": ["e_uni_master", "e_job_junior"],
+    "details": {
+      "faculty": "Информационные Технологии",
+      "degree": "Бакалавр"
+    }
+  },
+  {
+    "id": "e_uni_master",
+    "type": "study",
+    "name": "Магистратура по ИТ",
+    "startDate": "2016-09-01",
+    "endDate": "2018-06-30",
+    "categoryId": "education",
+    "details": {
+      "faculty": "Информационные Технологии",
+      "degree": "Магистр"
+    }
+  },
+  {
+    "id": "e_job_junior",
+    "type": "work",
+    "name": "Младший разработчик",
+    "startDate": "2016-07-15",
+    "endDate": "2018-02-28",
+    "categoryId": "career",
+    "relatedTo": ["e_job_middle"],
+    "details": {
+      "role": "Junior Frontend Developer",
+      "stack": ["HTML", "CSS", "JavaScript", "jQuery"]
+    }
+  },
+  {
+    "id": "e_job_middle",
+    "type": "work",
+    "name": "Средний разработчик",
+    "startDate": "2018-03-01",
+    "endDate": "2022-12-31",
+    "categoryId": "career",
+    "relatedTo": ["e_job_senior", "e_project_freelance"],
+    "details": {
+      "role": "Junior Frontend Developer",
+      "stack": ["HTML", "CSS", "JavaScript", "React", "Redux", "TypeScript", "Webpack"]
+    }
+  },
+  {
+    "id": "e_project_freelance",
+    "type": "project",
+    "name": "Большой фриланс-проект",
+    "startDate": "2019-10-01",
+    "endDate": "2020-03-31",
+    "categoryId": "projects",
+    "details": {
+      "client": "Startup X",
+      "stack": ["React", "Node.js"]
+    }
+  },
+  {
+    "id": "e_job_senior",
+    "type": "work",
+    "name": "Старший разработчик",
+    "startDate": "2023-01-05",
+    "endDate": "2024-06-30",
+    "categoryId": "career",
+    "details": {
+      "role": "Junior Frontend Developer",
+      "stack": ["HTML", "CSS", "JavaScript", "React", "Redux", "TypeScript", "Webpack", "Node.js", "Docker"]
+    }
+  }
+]
