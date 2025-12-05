@@ -28,8 +28,19 @@ jobs:
       if: always()
       run: npm run lint
     - name: Deploy
-    uses: peaceiris/actions-gh-pages@v4
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: ./dist
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+    - name: Send message
+      uses: aps-m/telegram-notify-action@v1
+      with:
+        token: ${{ secrets.TELEGRAM_TOKEN }}
+        to: ${{ secrets.TELEGRAM_CHATID_TO }}
+        message: |
+          Успешный Деплой!
+          Репозиторий: ${{ github.repository }}
+          Коммит: ${{ github.sha }}
+          Автор: ${{ github.actor }}
+          Статус: Сборка и деплой завершены. Проект доступен на GitHub Pages.
     
