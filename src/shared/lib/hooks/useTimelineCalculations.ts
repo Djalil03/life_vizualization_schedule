@@ -1,7 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { parseISO, min, max, differenceInDays } from 'date-fns';
 import type { Event } from '../../types/index';
-import { PADDING_X } from '../../const/konva';
 
 interface TimelineCalculations {
   minDate: Date;

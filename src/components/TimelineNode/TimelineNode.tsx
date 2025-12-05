@@ -54,7 +54,7 @@ const TimelineNode = (props: TimelineNodeProps) => {
                 fill="white"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
-                visible={width > 80}
+                visible={width > 150}
             />
         </>
     );

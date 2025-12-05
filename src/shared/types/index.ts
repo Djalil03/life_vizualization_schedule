@@ -3,7 +3,7 @@ interface BaseEvent {
     name: string;
     startDate: string;
     endDate: string;
-    categoryId: 'education' | 'career' | 'projects' | 'personal';
+    categoryId: 'education' | 'career' | 'projects' | 'personal' | 'relocation';
     relatedTo: string[];
 }
 
@@ -32,4 +32,13 @@ interface StudyEvent extends BaseEvent {
     };
 }
 
-export type Event = WorkEvent | ProjectEvent | StudyEvent;
+interface RelocationEvent extends BaseEvent {
+    type: 'relocation';
+    details: {
+        reason: string;
+        country: string;
+        city: string;
+    };
+}
+
+export type Event = WorkEvent | ProjectEvent | StudyEvent | RelocationEvent;

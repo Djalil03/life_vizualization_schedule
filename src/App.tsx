@@ -1,6 +1,6 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, type JSX } from 'react';
 import { Stage, Layer, Label, Tag, Text } from 'react-konva';
-import { parseISO } from 'date-fns';
+import { max, min, parseISO } from 'date-fns';
 import { CATEGORY_COLORS, CATEGORY_Y_MAP, NODE_HEIGHT, PADDING_X, STAGE_HEIGHT } from './shared/const/konva';
 import mockData from './shared/mockData/mockData.json';
 import type { Event } from './shared/types';
@@ -10,6 +10,9 @@ import './App.scss'
 import { useTimelineCalculations } from './shared/lib/hooks/useTimelineCalculations';
 import { useGetCalculateEdges } from './shared/lib/hooks/useGetCalculateEdges';
 import GraphEdge from './components/GraphEdge/GraphEdge';
+import { useGetOverlappingPeriods } from './shared/lib/hooks/useGetOverlappingPeriods';
+import { useGetMap } from './shared/lib/hooks/useGetMap';
+import { AnomalZone } from './components/AnomalZone/AnomalZone';
 
 interface TooltipState {
   event: Event | null;
@@ -24,6 +27,8 @@ function App() {
   const [tooltipState, setTooltipState] = useState<TooltipState>({ event: null, x: 0, y: 0 });
   const { workingWidth, dateToX } = useTimelineCalculations(events, stageWidth) || {};
   const edges = useGetCalculateEdges(events, dateToX);
+  const overlappingPeriods = useGetOverlappingPeriods(events);
+  const eventMap = useGetMap<string, Event>(events.map(event => [event.id, event]));
 
   const handleNodeHover = useCallback((eventData: Event | null, x: number, y: number) => {
     setTooltipState({ event: eventData, x, y });
@@ -32,14 +37,67 @@ function App() {
   const getEventInfo = useMemo(() => {
     if (!tooltipState.event) return '';
     const event = tooltipState.event;
-    if (event.type === 'study') {
+    
+    switch (event.type) {
+    case 'study':
         return `${event.name}\n${event.details.degree} в ${event.details.faculty}\n${event.startDate} - ${event.endDate}`;
-    } else if (event.type === 'work') {
+    case 'work':
         return `${event.name}\nРоль: ${event.details.role}\nКомпания: ${event.details.company || 'N/A'}\nСтек: ${event.details.stack?.join(', ')}\n${event.startDate} - ${event.endDate}`;
-    } else if (event.type === 'project') {
+    case 'project':
         return `${event.name}\nКомпания: ${event.details.client || 'N/A'}\nСтек: ${event.details.stack?.join(', ')}\n${event.startDate} - ${event.endDate}`;
+    case 'relocation':
+        return `${event.name}\nПереезд в ${event.details.city}, ${event.details.country}\nПричина: ${event.details.reason}\n${event.startDate} - ${event.endDate}`;
+    default:
+        return '';
     }
+
   }, [tooltipState.event]);
+
+  const renderAnomalies = useMemo(() => {
+    const anomalies: JSX.Element[] = [];
+
+    overlappingPeriods.forEach((conflictIds, eventId) => {
+      const eventA = eventMap.get(eventId);
+      if(!eventA) return;
+
+      conflictIds.forEach(conflictId => {
+        const eventB = eventMap.get(conflictId);
+        if (!eventB || eventB.id === eventA.id) return;
+
+        const startA = parseISO(eventA.startDate);
+        const endA = parseISO(eventA.endDate);
+        const startB = parseISO(eventB.startDate);
+        const endB = parseISO(eventB.endDate);
+
+        const overlapStart = max([startA, startB]);
+        const overlapEnd = min([endA, endB]);
+
+        const xStart = dateToX(overlapStart) - PADDING_X;
+        const xEnd = dateToX(overlapEnd) + PADDING_X;
+        const width = xEnd - xStart;
+
+        const yA = CATEGORY_Y_MAP[eventA.categoryId];
+        const yB = CATEGORY_Y_MAP[eventB.categoryId];
+        
+        const yMin = Math.min(yA, yB);
+        const yMax = Math.max(yA, yB) + NODE_HEIGHT;
+
+        if (width > 0) {
+            anomalies.push(
+                <AnomalZone
+                    key={`${eventA.id}-${eventB.id}-anomaly`}
+                    x={xStart}
+                    width={width}
+                    y={yMin - NODE_HEIGHT / 4}
+                    height={yMax - yMin + NODE_HEIGHT / 2}
+                />
+            );
+        }
+      });
+    });
+
+    return anomalies;
+  }, [dateToX, eventMap, overlappingPeriods]);
 
   const renderTimelineNodes = useMemo(() => {
     return events.map((event) => {
@@ -50,7 +108,7 @@ function App() {
       const xEnd = dateToX(endDate) - PADDING_X;
       const width = xEnd - xStart;
 
-      const yPosition = CATEGORY_Y_MAP[event.categoryId] || 500;
+      const yPosition = CATEGORY_Y_MAP[event.categoryId] || 600; // Дефолтная позиция Y, если категория не найдена
       const color = CATEGORY_COLORS[event.categoryId] || '#9E9E9E';
 
       return (
@@ -90,6 +148,7 @@ function App() {
         <Stage width={workingWidth} height={STAGE_HEIGHT} className='stage'>
           <Layer>
             {renderGraphEdges}
+            {renderAnomalies}
             {renderTimelineNodes}
           </Layer>
           <Layer>

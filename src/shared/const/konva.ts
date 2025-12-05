@@ -18,4 +18,5 @@ export const CATEGORY_Y_MAP: Record<string, number> = {
   'career': 200,
   'projects': 300,
   'personal': 400,
+  'relocation': 500,
 };

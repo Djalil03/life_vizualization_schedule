@@ -46,7 +46,7 @@
     "categoryId": "career",
     "relatedTo": ["e_job_senior", "e_project_freelance"],
     "details": {
-      "role": "Junior Frontend Developer",
+      "role": "Middle Frontend Developer",
       "stack": ["HTML", "CSS", "JavaScript", "React", "Redux", "TypeScript", "Webpack"]
     }
   },
@@ -69,8 +69,47 @@
     "startDate": "2023-01-05",
     "endDate": "2024-06-30",
     "categoryId": "career",
+    "relatedTo": ["relocation_to_europe", "e_job_senior_germany"],
     "details": {
-      "role": "Junior Frontend Developer",
+      "role": "Senior Frontend Developer",
+      "stack": ["HTML", "CSS", "JavaScript", "React", "Redux", "TypeScript", "Webpack", "Node.js", "Docker"]
+    }
+  },
+  {
+    "id": "relocation_to_europe",
+    "type": "relocation",
+    "name": "Переезд в Европу",
+    "startDate": "2024-07-01",
+    "endDate": "2024-08-10",
+    "categoryId": "relocation",
+    "details": {
+      "reason": "Возможность трудоустройства",
+      "country": "Germany",
+      "city": "Berlin"
+    }
+  },
+  {
+    "id": "relocation_to_europe_2",
+    "type": "relocation",
+    "name": "Переезд в Европу",
+    "startDate": "2024-08-01",
+    "endDate": "2024-09-10",
+    "categoryId": "relocation",
+    "details": {
+      "reason": "Возможность трудоустройства 2",
+      "country": "Germany",
+      "city": "Berlin"
+    }
+  },
+  {
+    "id": "e_job_senior_germany",
+    "type": "work",
+    "name": "Старший разработчик",
+    "startDate": "2024-08-20",
+    "endDate": "2025-12-31",
+    "categoryId": "career",
+    "details": {
+      "role": "Senior Frontend Developer",
       "stack": ["HTML", "CSS", "JavaScript", "React", "Redux", "TypeScript", "Webpack", "Node.js", "Docker"]
     }
   }

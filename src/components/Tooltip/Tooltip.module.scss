@@ -1,7 +1,6 @@
-/* Tooltip.css */
 .tooltipWrapper {
   position: relative;
-  display: inline-block; /* Or block, depending on your target element */
+  display: inline-block;
 }
 
 .tooltipContent {
@@ -12,10 +11,8 @@
   border-radius: 4px;
   white-space: nowrap;
   z-index: 1000;
-  /* Add positioning logic here (e.g., top, left, transform) */
-  /* Example: For a bottom tooltip */
   top: 100%; 
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 8px; /* Spacing from target */
+  margin-top: 8px;
 }

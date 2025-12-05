@@ -27,12 +27,10 @@ const GraphEdge: React.FC<GraphEdgeProps> = ({ source, target }) => {
     return (
         <Line
             points={points}
-            stroke="#6c757d" // Серый цвет
+            stroke="#6c757d"
             strokeWidth={2}
             lineCap="round"
-            tension={0.5} // Регулирует гладкость кривой
-            // Добавляем стрелку на конце
-            // Конфигурация стрелки в Konva может быть сложной. Для простоты пока ограничимся линией.
+            tension={0.5}
         />
     );
 };
