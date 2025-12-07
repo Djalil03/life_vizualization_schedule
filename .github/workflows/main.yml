@@ -23,7 +23,7 @@ jobs:
       run: npm install
     - name: build project
       if: always()
-      run: npm run build -- --base=/life_vizualization_schedule/
+      run: npm run build
     - name: linting
       if: always()
       run: npm run lint
