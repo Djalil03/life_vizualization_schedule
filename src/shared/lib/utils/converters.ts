@@ -29,6 +29,12 @@ export function convertToGroups(events: EventItem[]) {
     )
 }
 
+export function convertToBackgroundRanges() {
+    return new DataSet(
+        []
+    )
+}
+
 export function convertToGraphNodes(events: EventItem[]) {
     return new DataSet(
         events.map((e) => ({
@@ -56,7 +62,7 @@ export function buildLifeVisualizationData(events: EventItem[]) {
     return {
         timelineItems: convertToTimelineItems(events),
         timelineGroups: convertToGroups(events),
-        backgroundRanges: convertToBackgroundRanges(events),
+        backgroundRanges: convertToBackgroundRanges(),
         graphNodes: convertToGraphNodes(events),
         graphEdges: convertToGraphEdges(events),
     }
