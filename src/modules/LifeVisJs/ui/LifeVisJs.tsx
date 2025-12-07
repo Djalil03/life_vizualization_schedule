@@ -1,6 +1,6 @@
 import LifeView from './LifeView/LifeView'
 import events from '@/shared/mockData/mockData.json'
-import { buildLifeVisualizationData } from '@/shared/lib/utils/converters'
+import { buildLifeVisualizationData } from '../model/lib/utils/converters'
 
 export default function LifeVisJs() {
     const data = buildLifeVisualizationData(events)

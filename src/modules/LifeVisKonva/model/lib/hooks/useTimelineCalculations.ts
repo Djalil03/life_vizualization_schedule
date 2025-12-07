@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { parseISO, min, max, differenceInDays } from 'date-fns';
-import type { Event } from '../../types/index';
+import type { Event } from '../../../../../shared/types/index';
 
 interface TimelineCalculations {
   minDate: Date;

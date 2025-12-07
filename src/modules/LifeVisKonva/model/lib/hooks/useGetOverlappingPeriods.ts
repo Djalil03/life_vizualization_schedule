@@ -1,5 +1,5 @@
 import { parseISO } from 'date-fns';
-import type { Event } from '../../types/index';
+import type { Event } from '../../../../../shared/types/index';
 import { useMemo } from 'react';
 
 const isOverlapping = (startA: Date, endA: Date, startB: Date, endB: Date): boolean => {

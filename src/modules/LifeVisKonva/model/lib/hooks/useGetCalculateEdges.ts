@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { Event } from '../../types';
+import type { Event } from '../../../../../shared/types';
 import { CATEGORY_Y_MAP, NODE_HEIGHT, PADDING_X } from '@/shared/const/konva';
 import { parseISO } from 'date-fns';
 import { useGetMap } from './useGetMap';
