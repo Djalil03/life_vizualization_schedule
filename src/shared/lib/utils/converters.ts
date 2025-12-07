@@ -29,14 +29,6 @@ export function convertToGroups(events: EventItem[]) {
     )
 }
 
-export function convertToBackgroundRanges(events: EventItem[]) {
-// Example: mark 2020 as an anomaly zone if multiple events happened that year
-// For demo we create a simple static anomaly: COVID-ish period
-return new DataSet([
-        
-    ])
-}
-
 export function convertToGraphNodes(events: EventItem[]) {
     return new DataSet(
         events.map((e) => ({
