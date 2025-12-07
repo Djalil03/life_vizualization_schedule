@@ -10,7 +10,7 @@ export default defineConfig({
       },
     }),
   ],
-  base: "/",
+  base: '/life_vizualization_schedule/',
   resolve: {
     alias: {
       '@': '/src',
